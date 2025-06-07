@@ -1,0 +1,21 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        ptr = 0
+        available = dict()
+        while ptr < len(magazine):
+            letter = magazine[ptr]
+            if available.get(letter):
+                available[letter] = available[letter] + 1
+            else:
+                available[letter] = 1
+            ptr += 1
+
+        ptr = 0
+        while ptr < len(ransomNote):
+            letter = ransomNote[ptr]
+            if available.get(letter):
+                available[letter] = available[letter] - 1
+            else:
+                return False
+            ptr += 1
+        return True
